@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.3.3.RELEASE'
+        env = findProperty('env') ?: 'dev'
     }
     repositories {
         mavenCentral()
@@ -27,4 +28,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('org.springframework.boot:spring-boot-devtools')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+if (env == 'cloud') {
+    dependencies {
+        compile('com.microsoft.azure:spring-cloud-starter-azure-spring-cloud-client')
+    }
 }
